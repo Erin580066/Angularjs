@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-controller="Aaa">
+			<p>{{num}}</p>
+			<p>{{num | currency:"$"}}</p>
+			<p>{{list}}</p>
+			<p>{{list | filter:"r"}}</p>
+		</div>
+		<div ng-controller="Bbb">
+			<!--<p>{{name | firstUpper}}</p>-->
+			<p>{{name}}</p>
+			<p>{{num}}</p>
+		</div>
+		<script type="text/javascript">
+			var m1 = angular.module('myApp',[]);
+			m1.controller('Aaa',['$scope',function($scope){
+				$scope.num = '34885454054.343434';
+				$scope.list = [
+					{color:'red',age:20},
+					{color:'yellow',age:40},
+					{color:'blue',age:30},
+					{color:'green',age:10}
+				]
+			}]);
+			//自定义过滤器
+			m1.filter('firstUpper',function(){
+				return function(str){
+					return str.charAt(0).toUpperCase() + str.substring(1);
+				}
+			});
+//			m1.controller('Bbb',['$scope','$filter',function($scope,$filter){
+//				$scope.name = 'hello';
+//			}]);
+			m1.controller('Bbb',['$scope','$filter',function($scope,$filter){
+				$scope.name = $filter('firstUpper')('nihao');
+				$scope.num = $filter('currency')('32546546357');
+			}])
+		</script>
+	</body>
+</html>

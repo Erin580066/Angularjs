@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-controller="Aaa">{{name}}</div>
+		<div ng-controller="Bbb">{{name}}</div>
+		<div>{{age}}</div>
+		<div ng-controller="Ddd">
+			<ul>
+				<li ng-repeat="data in dataList" ng-click="data=$index">{{data}}</li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			function Aaa($scope,$rootScope){
+				$scope.name = "张三";
+				$scope.age = 30;
+				$rootScope.age = 50;//全局变量$rootScope
+			};
+			function Bbb($scope){
+				$scope.name = "李四";
+//				$scope.age = 40;
+			}
+			function Ccc(){
+				$http({
+					method:"GET",
+					url:"http://www.baidu.com",
+					perames:{"name":"Hello"}
+				}).success(function(data){
+					return data;
+				})
+			}
+			function Ddd($scope){
+				$scope.dataList = ['aaa','bbb','ccc'];
+			}
+		</script>
+	</body>
+</html>

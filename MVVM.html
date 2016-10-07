@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app>
+	<head>
+		<meta charset="UTF-8">
+		<title>双向数据绑定</title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-controller="Aaa">{{name}}</div>
+		<div ng-controller="Bbb">
+			<input type="text" ng-model="name"/>
+			<p>{{name}}</p>
+		</div>
+		<script type="text/javascript">
+		//数据影响视图
+//			function Aaa($scope,$timeout){
+//				$scope.name = "Hello";
+//				$timeout(function(){
+//					$scope.name = "我被修改了";
+//				},2000)
+//			}
+		//数据影响视图
+			function Aaa($scope){
+				$scope.name = 'hello';
+				setTimeout(function(){
+					
+					$scope.$apply(function(){
+						$scope.name = '我被修改了';
+					})
+				},2000)
+			}
+			
+		//视图影响数据
+			function Bbb($scope){
+				$scope.name = 'Hello';
+			}
+		</script>
+	</body>
+</html>

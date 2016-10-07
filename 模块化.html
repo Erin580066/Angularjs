@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-controller="Aaa">{{name}}</div>
+		<div ng-controller="Bbb">{{name}}</div>
+		<div ng-controller="Ccc">{{name}}</div>
+		<div ng-controller="Ddd">{{name}}</div>
+		<script type="text/javascript">
+			var m1 = angular.module('myApp',[]);
+			console.log(m1);
+			m1.controller('Aaa',function($scope){
+				$scope.name = 'hello';
+			});
+			m1.controller("Bbb",function($scope){
+				$scope.name = 'nihao';
+			});
+			//为了防止一些压缩软件对$scope的影响，写成带数组的形式
+			m1.controller('Ccc',['$scope',function($scope){
+				$scope.name = '我是局部的写法';
+			}]);
+			//全局的$rootScope只需在数组后面加就可以
+			m1.controller('Ddd',['$scope','$rootScope',function($scope,$rootScope){
+				$scope.name = '我是全局的写法';
+			}])
+		</script>
+	</body>
+</html>
