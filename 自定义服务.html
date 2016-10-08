@@ -1,9 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<script src="js/angular.min.js"></script>
 	</head>
 	<body>
+		<div ng-controller="Aaa">
+			<p>{{name}}</p>
+		</div>
+		<script type="text/javascript">
+			var m1 = angular.module('myApp',[]);
+			//hello就是自定的服务，带$的内部自带的服务，可以放在模块M1的factory里面，也可以放在provider里面，但是有区别的
+//			m1.factory('hello',function(){
+//				return {
+//					name : '123',
+//					show : function(){
+//						console.log(this.name);
+//					}
+//				};
+//			});
+			m1.provider('hello',function(){
+				return {
+					$get : function(){
+						return {
+							name : '123',
+							show : function(){
+								console.log(this.name);
+							}
+						}
+					}
+				}
+			})
+			m1.controller('Aaa',['$scope','hello',function($scope,hello){
+				$scope.name = hello.name;
+				hello.show();
+			}])
+		</script>
 	</body>
 </html>
