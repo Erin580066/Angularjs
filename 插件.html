@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+		<script src="http://cdn.bootcss.com/angular.js/1.3.0-beta.13/angular-sanitize.min.js"></script>
+	</head>
+	<body>
+		<div ng-controller="Aaa">
+			<p>{{text}}</p>
+			<p ng-bind="text"></p>
+			<p ng-bind-html="text"></p>
+		</div>
+		<script>
+			var m1 = angular.module('myApp',['ngSanitize']);
+			m1.controller('Aaa',['$scope',function($scope){
+				$scope.text = '<h1>Hello</h1>';
+			}])
+		</script>
+	</body>
+</html>
