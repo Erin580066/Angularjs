@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html >
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-controller="Aaa">
+			<p>{{name}}</p>
+		</div>
+		<div ng-controller="Bbb">
+			<p>{{name}}</p>
+		</div>
+		<script>
+			var m1 = angular.module('myApp1',[]);
+			var m2 = angular.module('myApp2',[]);
+			m1.controller('Aaa',['$scope',function($scope){
+				$scope.name = 'Hello';
+			}]);
+			m2.controller('Bbb',['$scope',function($scope){
+				$scope.name = 'hi';
+			}]);
+//			angular.bootstrap(document,[]);//用来初始化
+//          写成ng-app指令形式的只能一次初始化，下面的方法可以卓一初始化
+			document.onclick = function(){
+				var oDiv = document.getElementsByTagName('div');
+				angular.bootstrap(oDiv[0],['myApp1']);
+				angular.bootstrap(oDiv[1],['myApp2']);
+			}
+		</script>
+	</body>
+</html>

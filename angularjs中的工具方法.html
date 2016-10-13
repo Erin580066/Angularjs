@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script src="js/jquery-2.2.2.min.js"></script>
+<script src="js/angular.min.js"></script>
+</head>
+<body>
+	<div id="div1">aaaaaaaa</div>
+	<script type="text/javascript">
+//		function show(n1,n2){
+//			alert(n1);
+//			alert(n2);
+//			alert(this)//this指向window
+//		}
+		
+//		angular.bind()相当于jq当中的$.proxy()方法用来改变this指向
+//		angular.bind(document,show)(3,4);
+		
+		var a = {
+			name : 'hello'
+		};
+		var b = {
+			age : 34
+		};
+		
+//		angular.copy()//拷贝对象
+//		var c = angular.copy(a);
+//		console.log(a);//hello
+//		console.log(b);//34
+//		console.log(c);//hello
+//		var d = angular.copy(a,b);//a把所有值覆盖给了b，所以b里的age：34不存在
+//		console.log(a);//hello
+//		console.log(b);//hello
+//		console.log(d);//hello
+//		angular.extend()//对象继承
+		var e = angular.extend(b,a);
+		console.log(a);//
+		console.log(b);//
+		console.log(e);//
+		
+		var str = 'nihao';
+		console.log(angular.uppercase(str));//uppercase转大写
+		var str1 = 'HELLO';
+		console.log(angular.lowercase(str1));//lowercase转小写
+		
+		var oDiv1 = document.getElementById("div1");
+		$('#div1').css('background','red');
+		
+		
+	</script>
+</body>
+</html>
