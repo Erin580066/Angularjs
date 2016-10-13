@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
 <meta charset="UTF-8">
 <title></title>
@@ -8,6 +8,7 @@
 </head>
 <body>
 	<div id="div1">aaaaaaaa</div>
+	<div>{{name}}</div>
 	<script type="text/javascript">
 //		function show(n1,n2){
 //			alert(n1);
@@ -48,7 +49,10 @@
 		var oDiv1 = document.getElementById("div1");
 		$('#div1').css('background','red');
 		
-		
+		var m1 = angular.module('myApp',[]);
+		m1.run(['$rootScope',function($rootScope){
+			$rootScope.name = '我是全局的';
+		}])
 	</script>
 </body>
 </html>
