@@ -3,6 +3,14 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>双向数据绑定</title>
+		<style type="text/css">
+			input{
+				width:300px;
+				height:30px;
+				background:gray;
+				color:#fff;
+			}
+		</style>
 		<script src="js/angular.min.js"></script>
 	</head>
 	<body>
@@ -10,6 +18,13 @@
 		<div ng-controller="Bbb">
 			<input type="text" ng-model="name"/>
 			<p>{{name}}</p>
+		</div>
+		<div ng-controller="Ccc">
+			<p>商品价格:<input type="text" ng-model="iphone.money" /></p>
+			<p>商品个数:<input type="text" ng-model="iphone.num" /></p>
+			<p>商品金额:<span>{{sum() | currency : '￥'}}</span></p>
+			<p>商品运费:<span>{{iphone.fre | currency : '￥'}}</span></p>
+			<p>商品总计:<span>{{sum() + iphone.fre| currency : '￥'}}</span></p>
 		</div>
 		<script type="text/javascript">
 		//数据影响视图
@@ -33,6 +48,24 @@
 		//视图影响数据
 			function Bbb($scope){
 				$scope.name = 'Hello';
+			}
+			
+			function Ccc($scope){
+				$scope.iphone = {
+					money : 5,
+					num : 1,
+					fre : 10
+				};
+				$scope.sum = function(){
+					return $scope.iphone.money * $scope.iphone.num;
+				};
+//				$scope.$watch('iphone',function(newVal,oldVal){
+//					console.log(newVal);
+//					console.log(oldVal);
+//				},true)
+				$scope.$watch($scope.sum,function(newVal,oldVal){
+					$scope.iphone.fre = newVal >100 ? 0 : 10;
+				})
 			}
 		</script>
 	</body>
