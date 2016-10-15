@@ -50,7 +50,7 @@
 		$('#div1').css('background','red');
 		
 		var m1 = angular.module('myApp',[]);
-		m1.run(['$rootScope',function($rootScope){
+		m1.run(['$rootScope',function($rootScope){//run的用法是不用去添加指令
 			$rootScope.name = '我是全局的';
 		}])
 	</script>
