@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-controller="Aaa">
+			<input type="checkbox" ng-model="aaa" ng-dblclick="fnDb()"/>
+			<select name="" id="">
+				<option value="">1111</option>
+				<option ng-selected="aaa" value="">2222</option>
+				<option value="">3333</option>
+			</select>
+			<hr />
+			<input type="text" ng-change="bbb='hello'" ng-model="bbb">{{bbb}}<!--必配合ng-model使用须-->
+			<hr />
+			<input type="text" value="我是拷贝指令" ng-copy="ccc=true">{{ccc}}
+			<input type="text" value="我是剪切指令" ng-cut="ddd=true">{{ddd}}
+			<input type="text" value="我是粘贴指令" ng-paste="eee=true">{{eee}}
+			<script type="text/javascript">
+				var m1 = angular.module('myApp',[]);
+				m1.controller('Aaa',['$scope',function($scope){
+					
+//					$scope.dataList = [
+//						'aaaaa' , 'bbbbb' , 'cccccc' , 'dddddd' , 'eeeeee'
+//					];
+					$scope.fnDb = function(){
+						console.log(this);
+					}
+				}]);
+			</script>
+		</div>
+	</body>
+</html>

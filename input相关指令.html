@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script src="js/angular.min.js"></script>
+</head>
+<body>
+<div ng-controller="Aaa">
+    <input type="button" value="{{text}}" ng-disabled="isDisabled" ng-click="fnClick()"/>
+    <input type="text" / value="{{text}}" ng-readonly="isDisabled"/>
+    <input type="checkbox" value="{{text}}" ng-checked="isDisabled"/>c
+    <hr />
+    <!--建议用下面的写法上面的带{{}}表达式用户体验不好-->
+    <input type="button" ng-value="text" ng-disabled="isDisabled" />
+    <input type="text" / ng-value="text" ng-readonly="isDisabled"/>
+    <input type="checkbox" ng-value="text" ng-checked="isDisabled"/>
+</div>
+<script>
+	
+	var m1 = angular.module('myApp',[]);
+	m1.controller('Aaa',['$scope','$interval',function($scope,$interval){
+		var iNow = 5;
+		$scope.text = iNow + '秒';
+		$scope.isDisabled = true;
+		var timer = $interval(function(){
+			iNow--;
+			$scope.text = iNow + '秒';
+			if(iNow == 0){
+				$interval.cancel(timer);
+				$scope.isDisabled = false;
+				$scope.text = '可以点击了';
+			}
+		},1000);
+		$scope.fnClick = function(){
+			$scope.text = '5秒';
+		}
+	}]);
+	alert(7)
+</script>
+</body>
+</html>
