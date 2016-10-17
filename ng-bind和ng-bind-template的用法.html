@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+		<script src="http://cdn.bootcss.com/angular.js/1.3.0-beta.13/angular-sanitize.min.js"></script>
+		
+	</head>
+	<body>
+		<div ng-controller="Aaa">
+			<p>{{text}}</p> <!--单个表达式可以这样写-->
+			<p ng-bind="text"></p> <!--单个表达式也可以用ng-bind来写-->
+			<p ng-bind-template="{{text}}"></p> <!--单个也可以用ng-bind-template来写-->
+			<p ng-bind-template="{{text}},{{text}}"></p> <!--多个表达式得用ng-bind-template来写-->
+			<p ng-bind-html="name"></p>
+			<p ng-cloak>{{text}}</p> <!--要是就想用带{{}}的表达式解析可以用ng-cloak来实现-->
+			<p ng-non-bindable>{{text}}</p> <!--不让表达式解析就用ng-non-bindable-->
+		</div>
+		<script type="text/javascript">
+			var m1 = angular.module('myApp',['ngSanitize']);
+			m1.controller('Aaa',['$scope',function($scope){
+				$scope.text = 'Hello';
+				$scope.name = '<h1>我是带标签的数据需要引用插件配合ng-bind-html指令来解析</h1>'
+			}])
+			
+		</script>
+	</body>
+</html>
