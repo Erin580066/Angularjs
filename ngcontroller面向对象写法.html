@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script src="js/angular.min.js"></script>
+</head>
+<body>
+	<div ng-controller="FnAaa as obj"> <!--obj就是FnAaa这个构造函数下的一个对象，我们可以利用对象下的方法来实现-->
+		<div>{{obj.text}}:{{obj.num}}:{{obj.show()}}</div>
+	</div>
+	<div ng-controller="Bbb">
+		<div ng-repeat="arrOut in arr" ng-init="outIndex = $index">
+			<div ng-repeat="arrInner in arrOut" ng-init="innerIndex = $index">
+				<p>{{arrInner}}:{{outIndex}}:{{innerIndex}}</p>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var m1 = angular.module('myApp',[]);
+		m1.controller('Aaa',['$scope',FnAaa]);
+		function FnAaa($scope){
+//			alert(this)//object
+		};
+		FnAaa.prototype.num = '123';
+		FnAaa.prototype.text = 'hello';
+		FnAaa.prototype.show = function(){
+			return 'angularJs';
+		};
+		var m2 = angular.module('myApp',[]);
+		m2.controller('Bbb',['$scope',function($scope){
+			$scope.arr = [['a','b'],['c','d']];
+		}])
+	</script>
+</body>
+</html>

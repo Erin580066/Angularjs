@@ -16,12 +16,33 @@
 		<!--通用的写法可以如下：-->
 		<a ng-attr-href="{{url}}" ng-attr-title="{{text}}" ng-style="{{style}}">aaaaaa</a>
 	</div>
+	<hr />
+	<div controller="Bbb">
+		<input type="checkbox" ng-model="bBtn"/>
+		<!--<p ng-show="bBtn">aaaaaaaaaaaaaaaaa</p>-->
+		<p ng-hide="bBtn">bbbbbbbbbbbbbbbbb</p>  <!--相当于display:none-->
+		<p ng-if="bBtn">ccccccccccccc</p>  <!--添加删除dom节点-->
+	</div>
+	<hr />
+	<div ng-controller="Ccc">
+		<input type="checkbox" ng-model="bBtn1"/>
+		<div ng-switch on="bBtn1">
+			<p ng-switch-default>默认的效果</p>
+			<p ng-switch-when="false">切换的效果</p>
+		</div>
+	</div>
 	<script type="text/javascript">
 		var m1 = angular.module('myApp',[]);
 		m1.controller('Aaa',['$scope',function($scope){
 			$scope.text = 'Hello';
 			$scope.url = 'http://www.baidu.com';
 			$scope.style = "{color:'red',background:'yellow'}";
+		}]);
+		m1.controller('Bbb',['$scope',function($scope){
+			$scope.bBtn = 'true';
+		}]);
+		m1.controller('Ccc',['$scope',function($scope){
+			$scope.bBtn1= 'true'
 		}])
 	</script>
 </body>
