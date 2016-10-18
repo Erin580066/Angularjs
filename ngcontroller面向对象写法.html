@@ -15,6 +15,9 @@
 				<p>{{arrInner}}:{{outIndex}}:{{innerIndex}}</p>
 			</div>
 		</div>
+		<!--<input type="text" ng-model="name"/> <!--实现双向数据绑定可以这样-->
+		<input type="text" ng-model="name" ng-model-options="{updateOn : 'blur'}"/> <!--不想实现双向数据绑定可以这样，当光标移开的时候触发-->
+		<div>{{name}}</div>
 	</div>
 	<script type="text/javascript">
 		var m1 = angular.module('myApp',[]);
@@ -30,6 +33,7 @@
 		var m2 = angular.module('myApp',[]);
 		m2.controller('Bbb',['$scope',function($scope){
 			$scope.arr = [['a','b'],['c','d']];
+			$scope.name = 'hello'
 		}])
 	</script>
 </body>

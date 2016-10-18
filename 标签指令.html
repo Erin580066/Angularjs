@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="js/angular.min.js"></script>
+<title></title>
+</head>
+<body>
+	<div ng-app="myApp" ng-controller="Aaa">
+		<a href="">aaaaaaaaaaaa</a> <!--指令标签因为在ng-app里面,他可以阻止默认行为即跳转页面-->
+	</div>
+	<a href="">bbbbbbbbbbbb</a> <!--普通的html标签-->
+	<script type="text/javascript">
+		var m1 = angular.module('myApp',[]);
+		m1.controller('Aaa',['$scope',function($scope){
+			
+		}])
+	</script>
+</body>
+</html>
