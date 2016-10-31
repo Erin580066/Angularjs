@@ -7,8 +7,12 @@
 </head>
 <body>
 	<div ng-app="myApp" ng-controller="Aaa">
-		<a href="">aaaaaaaaaaaa</a> <!--指令标签因为在ng-app里面,他可以阻止默认行为即跳转页面-->
+		<a href="">{{myColor.name}}</a> <!--指令标签因为在ng-app里面,他可以阻止默认行为即跳转页面-->
 		<select ng-options="color.name for color in colors" ng-model="myColor"></select>
+		<hr />
+		<form novalidate>  <!--novalidate阻止表单型控件的默认行为-->
+			<input type="email" >
+		</form>
 	</div>
 	<a href="">bbbbbbbbbbbb</a> <!--普通的html标签-->
 	<script type="text/javascript">

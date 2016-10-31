@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			
+		</style>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-controller="Aaa">
+			<form novalidate name="nForm">
+				<div>
+					<label>用户名：</label>
+					<input type="text" name="" placeholder="请输入姓名"/>
+					<span ng-repeat="reg in regText.regList">{{reg.tips}}</span>
+				</div>
+			</form>
+		</div>
+		<script type="text/javascript">
+			var m1 = angular.module('myApp',[]);
+			m1.controller('Aaa',['$scope',function($scope){
+				$scope.regText = {
+					
+				}
+			}])
+		</script>
+	</body>
+</html>

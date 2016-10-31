@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			input.ng-valid{background:gray;height:30px;}
+			input.ng-invalid{background:red;}
+		</style>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-controller="Aaa">
+			<form novalidate name="myForm">
+				<!--ng-minlength  输入的最少长度-->
+				<!--ng-pattern 满足正则的条件-->
+				<input type="text" name="myText" ng-model="text" ng-minlength="5" required="" ng-pattern="/^[a-zA-Z]+$/"/>
+				<div>{{myForm.myText.$valid}}</div>
+				<div>{{myForm.myText.$invalid}}</div>
+				<div>{{myForm.myText.$pristine}}</div>
+				<div>{{myForm.myText.$dirty}}</div>
+				<div>{{myForm.myText.$error}}</div>
+			</form>
+		</div>
+		<script type="text/javascript">
+			var m1 = angular.module('myApp',[]);
+			m1.controller('Aaa',['$scope',function($scope){
+				$scope.text = 'Hello';
+			}])
+		</script>
+	</body>
+</html>
