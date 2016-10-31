@@ -13,8 +13,8 @@
 			<form novalidate name="nForm">
 				<div>
 					<label>用户名：</label>
-					<input type="text" name="" placeholder="请输入姓名"/>
-					<span ng-repeat="reg in regText.regList">{{reg.tips}}</span>
+					<input type="text" name="nText" ng-model="regText.name" required ng-pattern="/^[a-zA-Z]+$/" ng-blur="regText.change(nForm.nText.$error)" placeholder="请输入姓名"/>
+					<span ng-repeat="reg in regText.regList | filter : regText.regVal">{{reg.tips}}</span>
 				</div>
 			</form>
 		</div>
@@ -22,9 +22,26 @@
 			var m1 = angular.module('myApp',[]);
 			m1.controller('Aaa',['$scope',function($scope){
 				$scope.regText = {
-					
+					regVal : 'default',
+					regList : [
+						{name : 'default',tips : '请输入正确的用户名'},
+						{name : 'required',tips : '用户名不能为空'},
+						{name : 'pattern',tips : '用户名必须是字母'},
+						{name : 'pass',tips : '√'}
+					],
+					change : function(err){
+//						console.log(err);
+//						验证未通过的时候
+						for(var attr in err){
+							if(err[attr] == true){
+								this.regVal = attr;
+								return;
+							}
+						};
+						this.regVal = "pass";
+					}
 				}
-			}])
+			}]);
 		</script>
 	</body>
 </html>
