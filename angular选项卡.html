@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#div1 div{width:200px;height:200px;border:1px solid #000;line-height:200px;text-align: center;font-size:80px;display:none;}
+			#div1 input.actvie{background:red;margin-bottom:20px;}
+			#div1 .show{display:block;}
+		</style>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<my-tab></my-tab>
+		<!--<div id="div1">
+			<input class="actvie" type="button" value="1"/>
+			<input type="button" value="2"/>
+			<input type="button" value="3"/>
+			<div class="show">a</div>
+			<div>b</div>
+			<div>c</div>
+		</div>-->
+		<script type="text/javascript">
+			var m1 = angular.module('myApp',[]);
+			m1.directive('myTab',function(){
+				return {
+					restrict : 'E',
+					replace : true,
+//					template : '<div id="div1">\
+//								<input class="actvie" type="button" value="1"/>\
+//								<input type="button" value="2"/>\
+//								<input type="button" value="3"/>\
+//								<div class="show">a</div>\
+//								<div>b</div>\
+//								<div>c</div>\
+//							</div>'
+					templateUrl : 'temp.html'
+				}
+			})
+		</script>
+	</body>
+</html>

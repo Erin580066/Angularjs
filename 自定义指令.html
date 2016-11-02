@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.hello{width:200px; height:30px; background:red;border:1px solid #000;}
+		</style>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<hello></hello><!--标签指令-->
+		<p hello></p><!--属性指令-->
+		<p class="hello"></p><!--class属性-->
+		<!-- directive:hello --><!--注释指令-->
+		<div ng-controller="Aaa"></div>
+		<script type="text/javascript">
+			var m1 = angular.module('myApp',[]);
+			m1.controller('Aaa',['$scope',function($scope){
+				
+			}]);
+			m1.directive('hello',function(){
+				return {
+					restrict : 'AECM',
+					replace : true,
+					template : '<div>Hello angular</div>'
+				};
+			});
+		</script>
+	</body>
+</html>
