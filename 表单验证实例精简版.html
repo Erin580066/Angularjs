@@ -13,12 +13,12 @@
 			<form novalidate name="nForm">
 				<div>
 					<label>用户名：</label>
-					<input type="text" name="nText" ng-model="regText.name" required ng-pattern="/^[a-zA-Z]+$/" ng-blur="regText.change(nForm.nText.$error)" placeholder="请输入姓名"/>
+					<input type="text" name="nText" ng-model="regText.name" required ng-pattern="/^[a-zA-Z]+$/" ng-blur="change('regText',nForm.nText.$error)" placeholder="请输入姓名"/>
 					<span ng-repeat="reg in regText.regList | filter : regText.regVal">{{reg.tips}}</span>
 				</div>
 				<div>
 					<label>密码：</label>
-					<input type="password" name="nPassword" ng-model="regPassword.name" required ng-minlength="6" ng-blur="regPassword.change(nForm.nPassword.$error)" placeholder="请输入密码"/>
+					<input type="password" name="nPassword" ng-model="regPassword.name" required ng-minlength="6" ng-blur="change('regPassword',nForm.nPassword.$error)" placeholder="请输入密码"/>
 					<span ng-repeat="reg in regPassword.regList | filter : regPassword.regVal">{{reg.tips}}</span>
 				</div>
 			</form>
@@ -33,18 +33,8 @@
 						{name : 'required',tips : '用户名不能为空'},
 						{name : 'pattern',tips : '用户名必须是字母'},
 						{name : 'pass',tips : '√'}
-					],
-					change : function(err){
-//						console.log(err);
-//						验证未通过的时候
-						for(var attr in err){
-							if(err[attr] == true){
-								this.regVal = attr;
-								return;
-							}
-						};
-						this.regVal = "pass";
-					}
+					]
+					
 				};
 				$scope.regPassword = {
 					regVal : 'default',
@@ -53,18 +43,16 @@
 						{name : 'required',tips : '密码不能为空'},
 						{name : 'minlength',tips : '密码长度最少6位'},
 						{name : 'pass',tips : '√'}
-					],
-					change : function(err){
-//						console.log(err);
-//						验证未通过的时候
-						for(var attr in err){
-							if(err[attr] == true){
-								this.regVal = attr;
-								return;
-							}
-						};
-						this.regVal = "pass";
-					}
+					]
+				};
+				$scope.change = function(reg,err){
+					for(var attr in err){
+						if(err[attr] == true){
+							$scope[reg].regVal = attr;
+							return;
+						}
+					};
+					$scope[reg].regVal = "pass";
 				}
 			}]);
 		</script>
