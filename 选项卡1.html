@@ -8,6 +8,7 @@
 			#div1 input.active,#div2 input.active{background:red;margin-bottom:20px;}
 			#div1 .show,#div2 .show{display:block;}
 		</style>
+		<script src="js/jquery-2.2.2.min.js"></script>
 		<script src="js/angular.min.js"></script>
 	</head>
 	<body ng-controller="Aaa">
@@ -26,7 +27,16 @@
 					controller :['$scope',function($scope){
 						$scope.name = "Monry";
 					}],
-					templateUrl : 'temp1.html'
+					templateUrl : 'temp1.html',
+					link : function(scope,element,attr){
+//						console.log(scope.name);
+//						console.log(element);
+//						console.log(attr.myId);
+						element.delegate('input','click',function(){
+							$(this).attr('class','active').siblings('input').attr('class','');
+							$(this).siblings('div').eq($(this).index()).css('display','block').siblings('div').css('display','none');
+						})
+					}
 				}
 			});
 			m1.controller('Aaa',['$scope',function($scope){
