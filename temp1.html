@@ -1,0 +1,10 @@
+<div id="{{myId}}">
+	<!--<input class="actvie" type="button" value="1" />
+	<input type="button" value="2"/>
+	<input type="button" value="3"/>
+	<div class="show">a</div>
+	<div>b</div>
+	<div>c</div>-->
+	<input ng-repeat="data in myData" type="button" ng-value="data.title" ng-class="{active:$first}" />
+	<div ng-repeat="data in myData" ng-style="{display:$first?'block':'none'}">{{data.content}}</div>
+</div>

@@ -4,14 +4,15 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<style type="text/css">
-			#div1 div{width:200px;height:200px;border:1px solid #000;line-height:200px;text-align: center;font-size:80px;display:none;}
-			#div1 input.actvie{background:red;margin-bottom:20px;}
-			#div1 .show{display:block;}
+			#div1 div,#div2 div{width:200px;height:200px;border:1px solid #000;line-height:200px;text-align: center;font-size:50px;display:none;}
+			#div1 input.actvie,#div2 input.actvie{background:red;margin-bottom:20px;}
+			#div1 .show,#div2 .show{display:block;}
 		</style>
 		<script src="js/angular.min.js"></script>
 	</head>
-	<body>
-		<my-tab></my-tab>
+	<body ng-controller="Aaa">
+		<my-tab my-id="div1" my-name="name" my-fn="show(num)"></my-tab>
+		<my-tab my-id="div2" my-name="name" my-fn="show(num)"></my-tab>
 		<!--<div id="div1">
 			<input class="actvie" type="button" value="1"/>
 			<input type="button" value="2"/>
@@ -26,6 +27,15 @@
 				return {
 					restrict : 'E',
 					replace : true,
+//					scope : true,
+					scope : {
+						myId : '@',
+						myName : '=',
+						myFn : '&'
+					},
+					controller :['$scope',function($scope){
+						$scope.name = "Monry";
+					}],
 //					template : '<div id="div1">\
 //								<input class="actvie" type="button" value="1"/>\
 //								<input type="button" value="2"/>\
@@ -36,7 +46,13 @@
 //							</div>'
 					templateUrl : 'temp.html'
 				}
-			})
+			});
+			m1.controller('Aaa',['$scope',function($scope){
+				$scope.name = 'Hello';
+				$scope.show = function(n){
+					alert(n);
+				}
+			}])
 		</script>
 	</body>
 </html>
