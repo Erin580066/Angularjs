@@ -24,9 +24,9 @@
 			});
 			m1.directive('hi',function(){
 				return {
-					restrict : 'E',
+					restrict : 'E', 
 					replace : true,
-					require : '?^hello',  //^是找父级的方式  ?是容错处理  建议平时一块用上
+					require : '?^hello',  //^是找父级的方式  ?是容错处理  建议平时一块用上 
 					template : '<span>hi angular</span>',
 					link : function(scope,element,attr,reController){
 						console.log(reController.name);
