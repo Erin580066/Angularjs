@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body ng-controller="Aaa">
+		<hello>
+			<hi></hi>
+		</hello>
+		<script type="text/javascript">
+			var m1 = angular.module('myApp',[]);
+			m1.directive('hello',function(){
+				return {
+					restrict : 'E',
+					replace : true,
+					transclude : true,
+					controller : function($scope){
+						this.name = '123456';
+					},
+					template : '<div>hello angular<h1 ng-transclude></h1></div>'
+				}
+			});
+			m1.directive('hi',function(){
+				return {
+					restrict : 'E',
+					replace : true,
+					require : '?^hello',  //^是找父级的方式  ?是容错处理  建议平时一块用上
+					template : '<span>hi angular</span>',
+					link : function(scope,element,attr,reController){
+						console.log(reController.name);
+					}
+				}
+			})
+			m1.controller('Aaa',['$scope',function($scope){
+				
+			}])
+		</script>
+	</body>
+</html>
