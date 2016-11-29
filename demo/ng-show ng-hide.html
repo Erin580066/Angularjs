@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html >
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			button{margin-bottom:20px;margin-top:100px;}
+			#pageAll div{
+				width:100%;
+				height:300px;
+			}
+			#pageAll div:nth-of-type(1){background:red;}
+			#pageAll div:nth-of-type(2){background:blue;}
+			#pageAll div:nth-of-type(3){background:green;}
+			#pageAll div:nth-of-type(4){background:orange;}
+		</style>
+		<script src="../js/angular.min.js"></script>
+	</head>
+	<body ng-app="myApp">
+		<div ng-controller="myCtrl" id="pageAll">
+			<button ng-click="togglePage('first')">商品详情</button>
+			<button ng-click="togglePage('second')">用户评论</button>
+			<button ng-click="togglePage('third')">第三个页面</button>
+			<button ng-click="togglePage('four')">第四个页面</button>
+			<div ng-show="pages.first" >商品详情页</div>
+			<div ng-show="pages.second" >用户评论页</div>
+			<div ng-show="pages.third" >第三个页面</div>
+			<div ng-show="pages.four" >第四个页面</div>
+		</div>
+		<script>
+			var app = angular.module('myApp',[]);
+			app.controller('myCtrl',['$scope',function($scope){
+				$scope.pages = {
+					first : true,
+					second : false,
+					third : false
+				}
+				$scope.togglePage = function(whichPage){
+					for(var attr in $scope.pages){
+						$scope.pages[attr] = false;
+					};
+					$scope.pages[whichPage] = true;
+				};
+			}]);
+		</script>
+	</body>
+</html>

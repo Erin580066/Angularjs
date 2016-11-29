@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../js/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-controller="myCtrl">
+			<form name="myForm">
+				<label for="">
+					用户名：<input type="text" name="usename" ng-model="uname" required=""/>
+				</label>
+				<span ng-show="myForm.usename.$invalid&& myForm.usename.$dirty">用户名必须填写</span>
+				<div><button ng-click="check()">提交</button></div>
+			</form>
+		</div>
+		<script type="text/javascript">
+			var app = angular.module('app',[]);
+			app.controller('myCtrl',['$scope',function($scope){
+				$scope.check = function(){
+					console.log($scope);
+				}
+			}])
+		</script>
+	</body>
+</html>

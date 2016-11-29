@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html >
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.B1:hover{background:red;}
+			.B2:hover{background:blue;}
+			.B3:hover{background:pink;}
+			
+			.abg{
+				width:200px;
+				height:100px;
+				border:1px solid #000;
+			}
+			
+		</style>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body ng-app="myApp">
+		<div ng-controller="myCtrl" id="aaa">
+			<button class="B1" ng-click="choose(colors[0])">{{colors[0]}}</button>
+			<button class="B2" ng-click="choose(colors[1])">{{colors[1]}}</button>
+			<button class="B3" ng-click="choose(colors[2])" ng-bind="colors[2]"></button>
+			<div class="abg">选中的颜色{{chooseColor}}</div>
+		</div>
+		<script>
+			var app = angular.module('myApp',[]);
+			app.controller('myCtrl',['$scope',function($scope){
+				$scope.colors = ['red','blue','pink'];
+				$scope.chooseColor = '';
+				$scope.choose = function(e){
+					console.log(this);
+					$scope.chooseColor = e
+				}
+			}])
+		</script>
+	</body>
+</html>

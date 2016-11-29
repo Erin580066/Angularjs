@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box{
+				font-size:30px;
+			}
+		</style>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<div id="box" ng-controller="myCtrl">
+			{{count}}
+			<!--<div ng-controller="myCtrl" ng-click="count=count+1">-->
+			<div ng-controller="myCtrl" ng-click="$emit('myEvent')">    <!--emit向上传递-->
+			<!--<div ng-controller="myCtrl" ng-click="$broadcast('myEvent')">   <!--broadcast向下传递-->
+				{{count}}
+				<div ng-controller="myCtrl">
+					{{count}}
+				</div>
+			</div>
+		</div>
+		<script>
+			var app = angular.module('app',[]);
+			app.controller('myCtrl',['$scope',function($scope){
+				$scope.count = 0;
+				$scope.$on('myEvent',function(event){
+					$scope.count++;
+					console.log(event.targetScope == event.currentTarget);
+//					console.log(event.name);
+					event.stopPropagation();
+				})
+			}]);
+		</script>
+	</body>
+</html>
