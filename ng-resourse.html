@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://cdn.bootcss.com/angular.js/1.3.8/angular.min.js"></script>
+		<script src="http://cdn.bootcss.com/angular.js/1.3.8/angular-route.min.js"></script>
+		<script src="http://cdn.bootcss.com/angular.js/1.3.8/angular-resource.min.js"></script>
+	</head>
+	<body>
+		<div ng-controller="Aaa">
+			<input type="button" value="张三" ng-click="$location.path('aaa/zhangsan')"/>
+			<input type="button" value="李四" ng-click="$location.path('aaa/lisi')"/>
+			<div ng-view></div>
+		</div>
+		<script type="text/javascript">
+			var m1 = angular.module('myapp',['ngRoute','ngResource']);
+			m1.config(['$routeProvider',function($routeProvider){
+				$routeProvider.when()
+			}])
+			m1.controller('Aaa',['$scope','$resource','$location',function($scope,$resource,$location){
+				
+			}]);
+		</script>
+	</body>
+</html>
