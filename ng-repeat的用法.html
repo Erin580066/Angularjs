@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.gray{
+				background:gray;
+			}
+			.red{
+				background:red;
+			}
+			.green{
+				background:green;
+			}
+		</style>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-controller="Aaa">
+			<ul ng-repeat="item in colors">
+				<li ng-class="{gray : $even ,red : $first, green : $last}">{{item}} index-{{$index}} first-{{$fisrt}} last-{{$last}} middle-{{$middle}} even-{{$even}} odd-{{$odd}}</li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			var app = angular.module('myapp',[]);
+			app.controller('Aaa',['$scope',function($scope){
+				$scope.colors = ['red','blue','green','yellow','pink','purple','orange'];
+			}]);
+		</script>
+	</body>
+</html>
