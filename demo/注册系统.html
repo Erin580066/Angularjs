@@ -5,10 +5,10 @@
 		<title></title>
 		<style type="text/css">
 			.submit_btn .btn{
-				/*width:100%;*/
+				width:100%;
 				display:block;
 			}
-			.waring{
+			.warning{
 				height:30px;
 				overflow: hidden;
 			}
@@ -21,23 +21,31 @@
 		<div class="container" ng-controller="myCtrl">
 			<h1 class="text-center">注册系统</h1>
 			<form name="regist" class="form-horizontal container-fluid">
-				<div calss="row form-group">
+				<div class="row form-group">
 					<div class="col-xs-4"><label for="user_name">用户名：</label></div>
-					<div class="col-xs-8"><input id="user_name" name="username" type="text" nt-model="data.username" ng-minlength="4" ng-maxlength="6"/></div>
+					<div class="col-xs-8">
+						<input id="user_name" name="username" type="text"  ng-model="data.username" ng-minlength="4" ng-maxlength="6" required/>
+					</div>
 				</div>
-				<div calss="row form-group">
-					<div class="col-xs-4"><label for="tel">用户名：</label></div>
-					<div class="col-xs-8"><input id="tel" name="tel" type="text" ng-model="data.tel" pattern="^1d{10}$"></div>
+				<div class="row form-group">
+					<div class="col-xs-4"><label for="tel">电&emsp;话：</label></div>
+					<div class="col-xs-8">
+						<input id="tel" name="tel" type="text" ng-model="data.tel" pattern="^1\d{10}$" required/>
+					</div>
 				</div>
-				<div calss="row form-group">
-					<div class="col-xs-4"><label for="address">地&emsp址：</label></div>
-					<div class="col-xs-8"><input id="address" name="address" type="text" ng-model="data.address" ng-required="true"/></div>
+				<div class="row form-group">
+					<div class="col-xs-4"><label for="address">地&emsp;址：</label></div>
+					<div class="col-xs-8">
+						<input id="address" name="address" type="text" ng-model="data.address" required/>
+					</div>
 				</div>
-				<div calss="row form-group">
-					<div class="col-xs-4"><label for="email">邮&emsp箱：</label></div>
-					<div class="col-xs-8"><input id="email" name="email" type="text" ng-model="data.email" ng-pattern="/^\w+@\w+\.\w+$/"/></div>
+				<div class="row form-group">
+					<div class="col-xs-4"><label for="email">邮&emsp;箱：</label></div>
+					<div class="col-xs-8">
+						<input id="email" name="email" type="text" ng-model="data.email" ng-pattern="/^\w+@\w+\.\w+$/" required/>
+					</div>
 				</div>
-				<div class="waring">
+				<div class="row warning">
 					<p class="text-danger" ng-show="regist.username.$dirty && regist.username.$invalid">请输入正确的名字</p>
 					<p class="text-danger" ng-show="regist.tel.$dirty && regist.tel.$invalid">请输入正确的手机号码</p>
 					<p class="text-danger" ng-show="regist.address.$dirty && regist.address.$invalid">地址必须填写</p>
@@ -45,7 +53,7 @@
 					<p class="text-danger" ng-show="showAllErr">请添加完整</p>
 				</div>
 				<div class="row submit_btn" >
-					<button class="btn btn-success">提交</button>
+					<button class="btn btn-success" ng-click="check()">提交</button>
 				</div>
 			</form>
 		</div>
@@ -53,11 +61,13 @@
 			var app = angular.module('app',[]);
 			app.controller('myCtrl',['$scope',function($scope){
 				$scope.data = {};
+//				当页面一打开不想提示  点击提交按钮时再判断
 				$scope.showAllErr = false;
 				$scope.check = function(){
 					$scope.showAllErr = $scope.regist.$invalid;
 					if( $scope.regist.$valid){
-						console.log($scope.regist.$valid)
+						console.log($scope.regist)
+						alert('正在提交数据中................')
 					}
 				}
 			}])

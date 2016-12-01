@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.red{
+				width:100px;
+				height:100px;
+				background:red;
+			}
+			.green{
+				width:100px;
+				height:100px;
+				background:green;
+			}
+		</style>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-controller="Aaa">
+			<button ng-click="getX()">投色子</button>
+			<div ng-class="{red:x>3,green:x<=3}">{{x}}</div>
+			<div ng-class="'green'" ng-style="{width:100*x + 'px'}">div</div>
+			<div ng-class="'red'" ng-style="styl"></div>
+		</div>
+		<script>
+			var app = angular.module('myapp',[]);
+			app.controller('Aaa',['$scope',function($scope){
+				$scope.getX = function(){
+					$scope.x = parseInt(Math.random()*6+1);
+					$scope.styl = {
+						width : 100 * $scope.x + 'px'
+					}
+				}
+//				$scope.aaa= 'green';
+			}]);
+		</script>
+	</body>
+</html>

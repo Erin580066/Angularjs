@@ -16,10 +16,24 @@
 		<script type="text/javascript">
 			var m1 = angular.module('myapp',['ngRoute','ngResource']);
 			m1.config(['$routeProvider',function($routeProvider){
-				$routeProvider.when()
+				$routeProvider.when('/aaa/:name',{
+//					template : '<div>{{data.name}}</div><div>{{data.age}}</div><div>{{data.job}}</div>',
+					template : '<div>{{data[1].name}}</div><div>{{data[1].age}}</div><div>{{data[1].job}}</div>',
+					controller : 'Aaa'
+				}).otherwise({
+					redirectTo : '/aaa/zhangsan'
+				})
 			}])
-			m1.controller('Aaa',['$scope','$resource','$location',function($scope,$resource,$location){
-				
+			m1.controller('Aaa',['$scope','$resource','$location','$routeParams',function($scope,$resource,$location,$routeParams){
+				$scope.$location = $location;
+				console.log($routeParams);
+//				这里有个小bug防止404 所以当$routeParams.name存在时才满足条件
+				if($routeParams.name){
+					var objResource = $resource($routeParams.name+'.json',{},{});
+//					$scope.data = objResource.get();
+//                  数据中是一组的话就得用query()
+					$scope.data = objResource.query();
+				}
 			}]);
 		</script>
 	</body>
