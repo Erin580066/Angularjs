@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-app="app">
+			<div repeat-num="3">
+				<h1 >我是子元素</h1>
+			</div>
+			<div repeat-num="5">
+				<h2 >我是另一个功能</h2>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var app = angular.module('app',[]);
+			app.directive('repeatNum',function(){
+				return {
+					restrict : "A",
+					link : function(scope,jqlite,attrs){
+//						console.log(this);
+//						console.log(arguments);
+						var num = attrs.repeatNum;
+//						for(var i=0;i<num;i++){
+//							var dom = jqlite.clone();
+//							jqlite.after(dom);
+//						}
+//						console.log(jqlite[0]);//  <div repeat-num="3">我是自定指令</div>
+						console.log(jqlite.children());
+						var dom = jqlite.children();
+						console.log(dom);
+						for (var i = 0; i < num; i++) {
+							var cloneDom = dom.clone();
+//							console.log(cloneDom);
+							jqlite.append(cloneDom);
+						}
+					}
+				}
+			});
+			
+		</script>
+	</body>
+</html>
