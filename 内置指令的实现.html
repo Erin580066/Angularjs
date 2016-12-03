@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-app="myapp">
+			<div ng-controller="main">
+				<input type="text" ng-model="msg" />
+				<h1 my-bind="msg"></h1>
+			</div>
+		</div>
+		<script type="text/javascript">
+			angular.module('myapp',[])
+			.controller('main',function($scope){
+//				定义初始化变量
+				$scope.msg = 'hello';
+			})
+			//定义指令
+			.directive('myBind',function(){
+				return {
+					restrict : 'A',
+					scope : {
+						msg : '=myBind'
+					},
+					link : function(scope,jqlite,attrs){
+						console.log(scope.msg)
+						scope.$watch(attrs.myBind,function(){
+							jqlite.html(scope.msg)
+						})
+						
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
