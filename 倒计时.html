@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body>
+		<div>
+			<h1>还剩{{h}}小时:{{m}}分:{{s}}秒赶紧抢购吧</h1>
+		</div>
+		<script type="text/javascript">
+			var date = new Date('2017-1-1 1:0:0').getTime();
+			console.log(date)
+			angular.module('myapp',[])
+			.run(function($rootScope,$interval){
+				function getTime(){
+					var nowTime = new Date().getTime();
+					var t = date - nowTime;
+					var h = t/1000/60/60;
+					return {
+						h : parseInt(t/1000/60/60),
+						m : parseInt(t/1000/60%60),
+						s : parseInt(t/1000%60)
+					}
+				}
+				var data = getTime();
+				$rootScope.h = data.h;
+				$rootScope.m = data.m;
+				$rootScope.s = data.s;
+				$interval(function(){
+					var data = getTime();
+					$rootScope.h = data.h;
+					$rootScope.m = data.m;
+					$rootScope.s = data.s;
+				},1000)
+			})
+			
+		</script>
+	</body>
+</html>
