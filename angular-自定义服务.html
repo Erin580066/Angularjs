@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.min.js"></script>
+	</head>
+	<body ng-app="myapp">
+		<!--控制器一：-->
+		<div ng-controller="main">
+			<h1>{{news}}</h1>
+		</div>
+		<!--控制器二：-->
+		<div ng-controller="other">
+			<h1>{{title}}</h1>
+		</div>
+		<script type="text/javascript">
+			var app = angular.module('myapp',[])
+			.factory('mainData',function(){
+				//在factory工厂方式中 我们要用return将数据的借口暴露出来
+				return {
+					news : '我是工厂方式暴露的数据'
+				}
+			})
+			//通过severse定义服务
+			.service('otherData',function(){
+				//在service中通过this讲数据暴露出来
+				this.title ='我是通过service中通过this暴露出来的数据'
+			})
+			.controller('main',function($scope,mainData){
+				$scope.news = mainData.news;
+			})
+			.controller('other',function($scope,otherData){
+				$scope.title = otherData.title;
+			})
+		</script>
+	</body>
+</html>
