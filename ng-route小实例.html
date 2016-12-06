@@ -19,10 +19,15 @@
 		<div >
 			<header>
 				<ul class="box_head nav nav-pills ">
-					<li class="active"><a href="#/">第一页</a></li>
+					<!--<li class="active"><a href="#/">第一页</a></li>
 					<li><a href="#/page2">第二页</a></li>
 					<li><a href="#/page3">第三页</a></li>
-					<li><a href="#/page4">第四页</a></li>
+					<li><a href="#/page4">第四页</a></li>-->
+					<li class="active" ng-click="changeUrl('/')">第一页</li>
+					<li ng-click="changeUrl('/page2')">第二页</li>
+					<li ng-click="changeUrl('/page3')">第三页</li>
+					<li ng-click="changeUrl('/page4')">第四页</li>
+					
 				</ul>
 			</header>
 			<!--渲染视图的模块-->
@@ -59,13 +64,17 @@
 				$scope.abc = "abc";
 			})
 			//通常将路由事件定义在作用域下面
-			.run(function($rootScope){
+			.run(function($rootScope,$location){
 				//为作用域绑定事件用$on()
 //				console.log($rootScope);
-				$rootScope.$on('$routeChangeStart',function(){
-					console.log(this);//第一个参数是个事件对象
-					console.log(arguments);//第二个参数是个路由对象
-				})
+//				$rootScope.$on('$routeChangeStart',function(){
+//					console.log(this);//第一个参数是个事件对象
+//					console.log(arguments);//第二个参数是个路由对象
+//				})
+				console.log($location);
+				$rootScope.changeUrl = function(url){
+					$location.path(url);
+				}
 			})
 //			console.log(app);
 		</script>
