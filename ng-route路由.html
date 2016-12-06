@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://cdn.bootcss.com/angular.js/1.3.8/angular.min.js"></script>
+		<script src="http://cdn.bootcss.com/angular.js/1.3.8/angular-route.min.js"></script>
+		
+	</head>
+	<body>
+		<div >
+			<header>导航模块</header>
+			<!--渲染视图的模块-->
+			<div ng-view>内容模块</div>
+		</div>
+		<script type="text/javascript">
+			var app = angular.module('myapp',['ngRoute'])
+			console.log(app)
+			app.config(function($routeProvider){
+				$routeProvider
+				.when('/',{
+					template : '<h1>{{msg}}</h1>',
+					controller : function($scope){
+						$scope.msg = '123'
+					}
+				})
+				.when('/abc',{
+					template : '<h1>{{abc}}</h1>',
+					//可以通过定义的控制器的名称来找到控制器
+					controller : "main"
+				})
+			})
+			app.controller('main',function($scope){
+				$scope.abc = "abc";
+			})
+		</script>
+	</body>
+</html>
