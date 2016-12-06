@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin:0;
+				padding:0;
+			}
+		</style>
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
+		<link rel="stylesheet" href="css/bootstrap.css"/>
+		<script src="http://cdn.bootcss.com/angular.js/1.3.8/angular.min.js"></script>
+		<script src="http://cdn.bootcss.com/angular.js/1.3.8/angular-route.min.js"></script>
+		
+	</head>
+	<body>
+		<div >
+			<header>
+				<ul class="box_head nav nav-pills ">
+					<li class="active"><a href="#/">第一页</a></li>
+					<li><a href="#/page2">第二页</a></li>
+					<li><a href="#/page3">第三页</a></li>
+					<li><a href="#/page4">第四页</a></li>
+				</ul>
+			</header>
+			<!--渲染视图的模块-->
+			<div ng-view>内容模块</div>
+		</div>
+		<script type="text/javascript">
+			var app = angular.module('myapp',['ngRoute'])
+//			console.log(app)
+			app.config(function($routeProvider){
+				$routeProvider
+				.when('/',{
+					template : '<h1>这是第一页</h1>',
+				})
+				.when('/page2',{
+					template : '<h1>这是第二页</h1>',
+					//可以通过定义的控制器的名称来找到控制器
+					controller : "main"
+				})
+				.when('/page3/:param1',{
+					template : '<h1>{{name}}</h1>',
+					controller : function($scope,$routeParams){
+//						console.log($routeParams);
+						$scope.name = $routeParams.param1;
+					}
+				})
+				.when('/page4',{
+					template : '<h1>这是第四页</h1>',
+				})
+				.otherwise({
+					redirectTo :'/page3/:name'
+				})
+			})
+			app.controller('main',function($scope){
+				$scope.abc = "abc";
+			})
+			//通常将路由事件定义在作用域下面
+			.run(function($rootScope){
+				//为作用域绑定事件用$on()
+//				console.log($rootScope);
+				$rootScope.$on('$routeChangeStart',function(){
+					console.log(this);//第一个参数是个事件对象
+					console.log(arguments);//第二个参数是个路由对象
+				})
+			})
+//			console.log(app);
+		</script>
+	</body>
+</html>
