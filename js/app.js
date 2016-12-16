@@ -1,7 +1,6 @@
 //定义模板
 angular.module('myapp',[])
 .controller('cartController',function($scope){
-	console.log($scope)
 	$scope.cart = [
 		{
 			id : '1000',
@@ -40,17 +39,67 @@ angular.module('myapp',[])
 	$scope.totalNum = function(){
 		var total = 0;
 		angular.forEach($scope.cart,function(item){
-			total += item.num ;
+			total += parseInt(item.num);
 		});
 		return total;
 	};
-	$scope.remove = function(id){
-//		alert(id)
-		$scope.cart = {
-			var index = -1;
-			angular.f
+	//产品某一项添加数量
+	$scope.addNum = function(id){
+		var index = findIndex(id);
+		if(index !==-1){
+			$scope.cart[index].num++;
 		}
-		
 	}
+	//产品某一项减少数量
+	$scope.reduce = function(id){
+		var index = findIndex(id);
+		if(index!==-1){
+			var reduceNum = $scope.cart[index];
+			if(reduceNum.num>1){
+				reduceNum.num--;
+			}else{
+				var returnKey = confirm('是否从购物车删除该商品');
+				if(returnKey){
+					$scope.remove(id);
+				}
+			}
+		}
+	}
+	//找到一个元素的索引值
+	var findIndex = function(id){
+		var index = -1;
+		angular.forEach($scope.cart,function(item,key){
+			if(item.id === id){
+				index = key;
+				return; //后面的不需要执行了
+			}
+		})
+		return index;
+	}
+	//删除一项列表
+	$scope.remove = function(id){
+		var index = findIndex(id);
+//		var index = -1;
+//		angular.forEach($scope.cart,function(item,key){
+//			if(item.id === id){
+//				index = key;
+//			}
+//		})
+		if(index !== -1){
+			$scope.cart.splice(index,1)
+		}
+	};
+	$scope.$watch('cart',function(newValue,oldValue){
+		angular.forEach(newValue,function(item,key){
+			if(item.num<1){
+				var returnKey = confirm('是否从购物车删除该商品');
+				if(returnKey){
+					$scope.remove(item.id);
+				}else{
+					item.num = oldValue[key].num;
+				}
+			}
+		})
+	},true)
 })
 	
