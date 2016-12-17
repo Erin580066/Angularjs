@@ -1,7 +1,7 @@
 //定义模板
 angular.module('myapp',[])
-.controller('cartController',function($scope){
-	$scope.cart = [
+.service('cartData',function(){
+	return [
 		{
 			id : '1000',
 			name : 'ihone5',
@@ -27,6 +27,19 @@ angular.module('myapp',[])
 			price : '7360'
 		}
 	];
+})
+.controller('cartController',function($scope,cartData){
+	$scope.cart = cartData;
+	$scope.orderType = 'id';
+	$scope.order = '-';
+	$scope.changeOrder = function(type){
+		$scope.orderType = type;
+		if($scope.order === ''){
+			$scope.order = '-';
+		}else{
+			$scope.order = '';
+		}
+	};
 	//商品总价
 	$scope.totalPrice = function(){
 		var total = 0;
