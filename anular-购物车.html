@@ -12,6 +12,7 @@
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
 	</head>
 	<body>
+		
 		<div class="container" ng-controller="cartController">
 			<nav class="navbar navbar-default" role="navigation">
 			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -44,6 +45,8 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="item in cart | filter:search | orderBy: order + orderType">
+						<!--自定义过滤器的用法如下一行代码-->
+					<!--<tr ng-repeat="item in cart | name>-->
 						<td ng-bind="item.id"></td>
 						<td ng-bind="item.name"></td>
 						<td>

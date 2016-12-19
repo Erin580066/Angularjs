@@ -1,5 +1,9 @@
 //定义模板
 angular.module('myapp',[])
+//.config(function($interpolateProvider){
+//	$interpolateProvider.startSymbol('!!');
+//	$interpolateProvider.endSymbol('!!')
+//})
 .service('cartData',function(){
 	return [
 		{
@@ -27,6 +31,18 @@ angular.module('myapp',[])
 			price : '7360'
 		}
 	];
+})
+//自定义过滤器
+.filter('name',function(){
+	return function(obj){
+		var newObj = [];
+		angular.forEach(obj,function(res){
+			if(res.num === 15){
+				newObj.push(res)
+			}
+		})
+		return newObj
+	}
 })
 .controller('cartController',function($scope,cartData){
 	$scope.cart = cartData;
