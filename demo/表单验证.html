@@ -12,6 +12,7 @@
 	</head>
 	<body ng-app="myapp">
 		<form name="myForm" class="container form-horizontal" ng-controller="myCtrl">
+			<!--用户名-->
 			<div class="form-group" ng-class="{'has-error':myForm.username.$dirty&&myForm.username.$invalid}">
 			    <label class="col-sm-2 control-label">用户名：</label>
 			    <div class="col-sm-10">
@@ -21,6 +22,7 @@
 				    <div ng-show="myForm.username.$error.pattern" class="alert alert-danger help-block">用户名必须以英文字母开头</div>
 			    </div>
 			</div>
+			<!--密码-->
 			<div class="form-group" ng-class="{'has-error':myForm.password.$dirty&&myForm.password.$invalid}">
 			    <label class="col-sm-2 control-label">密&emsp;码：</label>
 			    <div class="col-sm-10">
@@ -29,6 +31,7 @@
 				    <div ng-show="myForm.password.$error.minlength" class="alert alert-danger help-block">密码长度不能小于5位</div>
 			    </div>
 			</div>
+			<!--密码确认-->
 			<div class="form-group" ng-class="{'has-error':myForm.passwordConfirm.$dirty&&myForm.passwordConfirm.$invalid}">
 			    <label class="col-sm-2 control-label">确认密码：</label>
 			    <div class="col-sm-10">
@@ -36,6 +39,7 @@
 				    <div ng-show="myForm.password.$dirty&&myForm.passwordConfirm.$dirty&&data.password !== data.passwordConfirm" class="alert alert-danger help-block">密码和确认密码不一致</div>
 			    </div>
 			</div>
+			<!--邮箱-->
 			<div class="form-group" ng-class="{'has-error':myForm.email.$dirty&&myForm.email.$invalid}">
 			    <label class="col-sm-2 control-label">邮&emsp;箱：</label>
 			    <div class="col-sm-10">
@@ -45,6 +49,7 @@
 				    <div ng-show="myForm.email.$error.email" class="alert alert-danger help-block">邮箱格式不正确</div>
 			    </div>
 			</div>
+			<!--博客地址-->
 			<div class="form-group" ng-class="{'has-error':myForm.blog.$dirty&&myForm.blog.$invalid}">
 			    <label class="col-sm-2 control-label">博客地址：</label>
 			    <div class="col-sm-10">
@@ -52,6 +57,37 @@
 				    <div ng-show="myForm.blog.$error.maxlength" class="alert alert-danger help-block">密码长度不能超过30位</div>
 				    <div ng-show="myForm.blog.$error.minlength" class="alert alert-danger help-block">密码长度不能小于5位</div>
 				    <div ng-show="myForm.blog.$error.url" class="alert alert-danger help-block">网址格式不正确</div>
+			    </div>
+			</div>
+			<!--性别-->
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">性别：</label>
+			    <div class="col-sm-10">
+				    <label class="radio-inline">
+				    	<input type="radio" name="sex" ng-model="data.sex" value="1"/>男
+				    </label>
+				    <label class="radio-inline">
+				    	<input type="radio" name="sex" ng-model="data.sex" value="0"/>女
+				    </label>
+			    </div>
+			</div>
+			<!--爱好-->
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">爱好：</label>
+			    <div class="col-sm-10">
+				    <label class="checkbox-inline" ng-repeat="item in hobby">
+				    	<input type="checkbox" name="hobby[]" ng-checked="data.hobbies.indexOf(item.id) !== -1" ng-click="toggleSelect(item.id)"/>{{item.hobbies}}
+				    	<span ng-bind="item.name"></span>
+				    </label>
+			    </div>
+			</div>
+			<!--年龄-->
+			<div class="form-group" ng-class="{'has-error':myForm.age.$dirty&&myForm.age.$invalid}">
+			    <label class="col-sm-2 control-label">年龄：</label>
+			    <div class="col-sm-10">
+				    <input type="number" autocomplete="off" name="age" min="10" max="99" ng-model="data.age" ng-required="true" class="form-control"  placeholder="年龄">
+				    <div ng-show="myForm.age.$error.max" class="alert alert-danger help-block">年龄长度不能超过3位</div>
+				    <div ng-show="myForm.age.$error.min" class="alert alert-danger help-block">年龄长度不能小于2位</div>
 			    </div>
 			</div>
 		</form>
