@@ -90,6 +90,23 @@
 				    <div ng-show="myForm.age.$error.min" class="alert alert-danger help-block">年龄长度不能小于2位</div>
 			    </div>
 			</div>
+			<!--省份-->
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">省份：</label>
+			    	<div class="col-sm-3">
+			    		<select class="form-control" ng-change="data.area = false" ng-model="data.province" ng-options="x.id as x.name for x in cites | cityFilter : 0">				    		
+				    	</select>
+			    	</div>
+			    	<div class="col-sm-3">
+			    		<select class="form-control" ng-show="data.province" ng-model="data.area" ng-options="x.id as x.name for x in cites | cityFilter : data.province">				    		
+				    	</select>
+			    	</div>
+			    	<div class="col-sm-3">
+			    		<select class="form-control" ng-show="data.province&&data.area" ng-model="data.city" ng-options="x.id as x.name for x in cites | cityFilter : data.area">				    		
+				    	</select>
+			    	</div>
+			    </div>
+			</div>
 		</form>
 		<script src="js/angular.min.js"></script>
 		<script src="js/form.js"></script>
